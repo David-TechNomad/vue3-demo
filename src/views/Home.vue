@@ -1,9 +1,17 @@
 <template>
   <div class="home" id="home">
     <button @click="openModal">Open Modal</button><br />
-    <Modal :isOpen="modalIsOpen" @close-modal="onModalClose">
-      My Modal !!!!</Modal
-    >
+    <Modal :isOpen="modalIsOpen" @close-modal="onModalClose" :data="tableArr">
+      My Modal !!!!
+      <template v-slot:section>
+        <div>我是插槽插入的内容</div>
+      </template>
+      <!-- <template #section>
+        <div>我是插槽插入的内容</div>
+      </template> -->
+      <!-- <span #data>我是插槽插入的内容</span> -->
+      <!-- <span #default="{data}">我是插槽插入的内容</span> -->
+    </Modal>
     <Header :has_back="false" />
     <Product :items="likes" @inquire="inquire" />
     <Product :items="recommends" @inquire="inquire" />
@@ -29,7 +37,6 @@ export default {
     const { inquire } = useDetailPage();
     const modalIsOpen = ref(false);
     const openModal = () => {
-      debugger;
       modalIsOpen.value = true;
     };
     const onModalClose = () => {

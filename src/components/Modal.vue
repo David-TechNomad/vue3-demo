@@ -2,6 +2,8 @@
   <teleport to="#app">
     <div id="center" v-if="isOpen">
       <h2><slot>this is a modal</slot></h2>
+      <slot name="section"></slot>
+      <slot :data="data"></slot>
       <button @click="buttonClick">Close</button>
     </div>
   </teleport>
@@ -18,8 +20,15 @@ export default {
     const buttonClick = () => {
       context.emit("close-modal");
     };
+    const infomation = {
+      phone: "138xxxx6666",
+      address: "中国北京",
+    };
+    const message = "abc";
     return {
       buttonClick,
+      infomation,
+      message,
     };
   },
 };
